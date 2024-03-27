@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/tram-lite@5/output/import-components.js"
+        tl-components=""></script>
+
+        <script src="https://unpkg.com/tram-lite@5">
+        </script>
+
+    </head>
+    <body>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            console.log(urlParams.has('cards'));
+            const cards = urlParams.get('cards')
+            console.log(cards);
+            //http://localhost:3000/?cards=1234567890
+        </script>
+        <header>
+        </header>
+        <body>
+        </body>
+    </body>
+</html>
