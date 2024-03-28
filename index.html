@@ -3,7 +3,7 @@
     <!-- TramLite v5-->
     <script
       src="https://unpkg.com/tram-lite@5/output/import-components.js"
-      tl-components="./deck/deck.html"
+      tl-components="./deck/deck-down.html ./results/cards-results.html ./DataContext/pull-card-context.html"
     ></script>
     <script src="https://unpkg.com/tram-lite@5"></script>
 
@@ -40,9 +40,14 @@
       <h1>Trionfi Tavern</h1>
     </header>
     <main>
-      <section deck>
-        <deck-down> </deck-down>
-      </section>
+      <pull-card-context>
+        <section deck>
+          <deck-down></deck-down>
+        </section>
+        <section results>
+          <cards-results></cards-results>
+        </section>
+      </pull-card-context>
     </main>
   </body>
 </html>

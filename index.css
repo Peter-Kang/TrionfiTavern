@@ -22,7 +22,7 @@ main {
   margin: auto;
   text-align: center;
 }
-/*main Grid*/
+/*Grid for cards*/
 main {
   display: grid;
   grid-template-rows: 1fr auto;
@@ -35,6 +35,11 @@ main {
 /*assign the sections*/
 section[deck] {
   grid-area: deck;
+  align-self: center;
+  margin: auto;
+}
+section[results] {
+  grid-area: results;
   align-self: center;
   margin: auto;
 }
