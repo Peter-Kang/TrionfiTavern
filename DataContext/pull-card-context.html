@@ -1,5 +1,11 @@
 <pull-card-context>
   <slot></slot>
-  <style></style>
+  <script tl-effect>
+    //APIs
+    this.addEventListener("deck-draw", (event) => {
+      //send the event down
+      TramLite.broadcastEvent(this, "deck-draw", "down");
+    });
+  </script>
   <script></script>
 </pull-card-context>
