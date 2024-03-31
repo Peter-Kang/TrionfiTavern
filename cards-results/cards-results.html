@@ -13,7 +13,7 @@
   </style>
   <div id="mat" class="card-mat" current-cards=""></div>
   <script tl-effect>
-    function GetRandomCardNotOnList(mat) {
+    function GetRandomCardNotOnList(mat, deckToUse) {
       //get current-cards into a array
       let cardsPicked = new Set(
         mat
@@ -23,8 +23,8 @@
           .map((x) => Math.abs(x))
       );
       //pick random index not on current-cards
-      if (cardsPicked.size < cardSrcDefault.length) {
-        let unpickedCards = cardSrcDefault
+      if (cardsPicked.size < deckToUse.length) {
+        let unpickedCards = deckToUse
           .map((card, index) => index.toString())
           .filter((index) => {
             return !cardsPicked.has(Number(index));
@@ -40,13 +40,13 @@
           "current-cards",
           current + " " + just_picked_value.toString()
         );
-        return [cardSrcDefault[unpickedCards[random_index]], isFlipped];
+        return [deckToUse[unpickedCards[random_index]], isFlipped];
       }
       return null;
     }
 
     function addCard(mat) {
-      const [src, isFlipped] = GetRandomCardNotOnList(mat);
+      const [src, isFlipped] = GetRandomCardNotOnList(mat, cardSrcDefault);
       const card = createCard(src, isFlipped);
       if (card != null) {
         mat.appendChild(card);

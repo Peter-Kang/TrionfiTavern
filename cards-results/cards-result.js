@@ -1,7 +1,7 @@
 function createCard(cardSrc, isFlipped) {
   if (cardSrc != null) {
     const card = document.createElement("img");
-    let style = "width:18%;padding:5px;min-width: 250px;";
+    let style = "width:18%;padding:5px;min-width: 150px;";
     if (isFlipped) {
       style = style.concat("transform: rotate(180deg)");
     }
