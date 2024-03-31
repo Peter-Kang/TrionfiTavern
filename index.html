@@ -12,20 +12,11 @@
     <link rel="stylesheet" type="text/css" href="./shootingstar.css" />
 
     <!-- JS files-->
-    <script src="./cards-results/cards-result-default.js"></script>
-    <script src="./cards-results/cards-result.js"></script>
+    <script src="./cards-results/PickRandomCard.js"></script>
+    <script src="./cards-results/cards-resultsUI.js"></script>
+    <script src="./Decks/default-deck.js"></script>
   </head>
   <body>
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      console.log("Has Cards: " + urlParams.has("cards"));
-      const cardsListURLParameters = urlParams.get("cards");
-      console.log("Cards: " + cardsListURLParameters);
-      console.log("Hash Deck: " + urlParams.has("deck"));
-      const deckURLParameters = urlParams.get("deck");
-      console.log("Deck: " + deckURLParameters);
-      //http://localhost:3000/?deck=0&cards=12
-    </script>
     <div class="shooting_star"></div>
     <div class="shooting_star"></div>
     <div class="shooting_star"></div>

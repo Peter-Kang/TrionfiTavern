@@ -12,3 +12,9 @@ function createCard(cardSrc, isFlipped) {
     return null;
   }
 }
+
+function addCard(mat, deckToUse, card) {
+  const isFlipped = card.includes("-");
+  const cardElement = createCard(deckToUse[Math.abs(Number(card))], isFlipped);
+  mat.appendChild(cardElement);
+}

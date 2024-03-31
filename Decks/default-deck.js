@@ -78,3 +78,5 @@ const cardSrcDefault = [
   "https://cdn.jsdelivr.net/gh/peter-kang/CDN/Tarot/Images/Default/wapa.jpg",
   "https://cdn.jsdelivr.net/gh/peter-kang/CDN/Tarot/Images/Default/waqu.jpg",
 ];
+
+const DeckList = [cardSrcDefault];

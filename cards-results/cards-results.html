@@ -1,4 +1,4 @@
-<cards-results current-cards="">
+<cards-results current-cards="" deck="0">
   <style>
     .card-mat {
       margin-right: auto;
@@ -12,52 +12,65 @@
     }
   </style>
   <div id="mat" class="card-mat"></div>
+
+  <script tl-effect tl-dependencies="current-cards deck">
+    /* 
+Update Mat from current-card list 
+*/
+    const mat = this.shadowRoot.getElementById("mat");
+    //    clear
+    mat.innerHTML = "";
+    //    fill
+    if (this.getAttribute("current-cards").length != 0) {
+      let cardsPicked = this.getAttribute("current-cards")
+        .trimStart()
+        .split(" "); //get a current list of cards picked
+      const inputIndex = Number(this.getAttribute("deck"));
+      const deckIndexToUse =
+        inputIndex >= 0 && inputIndex < DeckList.length ? inputIndex : 0; //use default if not a valid deck
+      const deckToUse = DeckList[deckIndexToUse];
+      //display each of the cards
+      cardsPicked.forEach((card) => {
+        console.log(cardsPicked);
+        addCard(mat, deckToUse, card);
+      });
+    }
+  </script>
+
   <script tl-effect>
-    function GetRandomCardNotOnList(cardResult, deckToUse) {
-      //get current-cards into a array
-      let cardsPicked = new Set(
-        cardResult
-          .getAttribute("current-cards")
-          .trimStart()
-          .split(" ")
-          .map((x) => Math.abs(x))
-      );
-      //pick random index not on current-cards
-      if (cardsPicked.size < deckToUse.length) {
-        let unpickedCards = deckToUse
-          .map((card, index) => index.toString())
-          .filter((index) => {
-            return !cardsPicked.has(Number(index));
-          });
-        const random_index = Math.floor(Math.random() * unpickedCards.length);
-        //check if it is a flipped card
-        const isFlipped = Math.floor(Math.random() * 10) == 0;
-        const current = cardResult.getAttribute("current-cards");
-        const just_picked_value = isFlipped
-          ? unpickedCards[random_index] * -1
-          : unpickedCards[random_index];
-        cardResult.setAttribute(
-          "current-cards",
-          current + " " + just_picked_value.toString()
-        );
-        return [deckToUse[unpickedCards[random_index]], isFlipped];
-      }
-      return null;
+    /*
+    INITIALIZATION
+    Page Loads read in parameters
+    */
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log(
+      "Has Cards: " + urlParams.has("cards"),
+      "Cards: " + urlParams.getAll("cards")
+    );
+    console.log("Hash Deck: " + urlParams.has("deck"), urlParams.get("deck"));
+    //Example http://localhost:3000/?deck=0&cards=46&cards=-0
+
+    const urlDeck = urlParams.get("deck");
+    if (
+      !isNaN(urlDeck) &&
+      Number(urlDeck) > 0 &&
+      Number(urlDeck) < DeckList.length
+    ) {
+      this.setAttribute("deck");
     }
 
-    function addCard(cardResult) {
-      const [src, isFlipped] = GetRandomCardNotOnList(
-        cardResult,
-        cardSrcDefault
-      );
-      const card = createCard(src, isFlipped);
-      if (card != null) {
-        cardResult.shadowRoot.getElementById("mat").appendChild(card);
-      }
-    }
-
+    const deckIndexToUse = this.getAttribute("deck");
+    const getDeckToUse = DeckList[deckIndexToUse];
+    const urlCards = urlParams.getAll("cards");
+    urlCards.filter((card) => {
+      return !isNaN(urlDeck) && getDeckToUse.length > Math.abs(card);
+    });
+    this.setAttribute("current-cards", urlCards.join(" "));
+    /*
+    Button Pressed Event - Picking a Random Card to add
+    */
     this.addEventListener("deck-draw", (event) => {
-      addCard(this);
+      addRandomCard(this);
     });
   </script>
 </cards-results>
