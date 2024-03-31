@@ -1,4 +1,4 @@
-<cards-results>
+<cards-results current-cards="">
   <style>
     .card-mat {
       margin-right: auto;
@@ -11,12 +11,12 @@
       text-align: center;
     }
   </style>
-  <div id="mat" class="card-mat" current-cards=""></div>
+  <div id="mat" class="card-mat"></div>
   <script tl-effect>
-    function GetRandomCardNotOnList(mat, deckToUse) {
+    function GetRandomCardNotOnList(cardResult, deckToUse) {
       //get current-cards into a array
       let cardsPicked = new Set(
-        mat
+        cardResult
           .getAttribute("current-cards")
           .trimStart()
           .split(" ")
@@ -32,11 +32,11 @@
         const random_index = Math.floor(Math.random() * unpickedCards.length);
         //check if it is a flipped card
         const isFlipped = Math.floor(Math.random() * 10) == 0;
-        const current = mat.getAttribute("current-cards");
+        const current = cardResult.getAttribute("current-cards");
         const just_picked_value = isFlipped
           ? unpickedCards[random_index] * -1
           : unpickedCards[random_index];
-        mat.setAttribute(
+        cardResult.setAttribute(
           "current-cards",
           current + " " + just_picked_value.toString()
         );
@@ -45,17 +45,19 @@
       return null;
     }
 
-    function addCard(mat) {
-      const [src, isFlipped] = GetRandomCardNotOnList(mat, cardSrcDefault);
+    function addCard(cardResult) {
+      const [src, isFlipped] = GetRandomCardNotOnList(
+        cardResult,
+        cardSrcDefault
+      );
       const card = createCard(src, isFlipped);
       if (card != null) {
-        mat.appendChild(card);
+        cardResult.shadowRoot.getElementById("mat").appendChild(card);
       }
     }
 
     this.addEventListener("deck-draw", (event) => {
-      const mat = document.getElementById("mat");
-      addCard(mat);
+      addCard(this);
     });
   </script>
 </cards-results>
