@@ -10,9 +10,18 @@
       padding: 10px;
       text-align: center;
     }
+    p{
+      color:white;
+    }
+    section[share]{
+      visibility: hidden;
+    }
   </style>
+  <section share id="shareSection">
+    <p>Link to Share Reading</p>
+    <input type="textbox" id="copyBox"></div>
+  </section>
   <div id="mat" class="card-mat"></div>
-
   <script tl-effect tl-dependencies="current-cards deck">
     /* 
 Update Mat from current-card list 
@@ -34,6 +43,11 @@ Update Mat from current-card list
         console.log(cardsPicked);
         addCard(mat, deckToUse, card);
       });
+      //Create Link and make visable
+      const urlParamsLink = new URLSearchParams(window.location.search);
+      const current_url =location.protocol + '//' + location.host + location.pathname + urlParamsLink.toString();
+      this.shadowRoot.getElementById("copyBox").innerHTML = current_url;
+      this.shadowRoot.getElementById("shareSection").style.visibility = "visible";
     }
   </script>
 

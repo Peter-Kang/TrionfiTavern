@@ -18,3 +18,8 @@ function addCard(mat, deckToUse, card) {
   const cardElement = createCard(deckToUse[Math.abs(Number(card))], isFlipped);
   mat.appendChild(cardElement);
 }
+
+function CreateLink(urlParameters,cards, deck)
+{
+
+}
