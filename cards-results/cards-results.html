@@ -11,14 +11,39 @@
       text-align: center;
     }
   </style>
-  <div id="mat" class="card-mat"></div>
+  <div id="mat" class="card-mat" current-cards=""></div>
   <script tl-effect>
+    function GetRandomCardNotOnList(mat) {
+      //get current-cards into a array
+      let cardsPicked = new Set(
+        mat.getAttribute("current-cards").trimStart().split(" ")
+      );
+      //pick random index not on current-cards
+      if (cardsPicked.size < cardSrcDefault.length) {
+        let unpickedCards = cardSrcDefault
+          .map((card, index) => index.toString())
+          .filter((index) => {
+            return !cardsPicked.has(index);
+          });
+        const random_index = Math.floor(Math.random() * unpickedCards.length);
+        const current = mat.getAttribute("current-cards");
+        mat.setAttribute(
+          "current-cards",
+          current + " " + unpickedCards[random_index]
+        );
+        return cardSrcDefault[unpickedCards[random_index]];
+      }
+      return null;
+    }
+
     function addCard(mat) {
-      mat.appendChild(createCard());
+      const card = createCard(GetRandomCardNotOnList(mat));
+      if (card != null) {
+        mat.appendChild(card);
+      }
     }
 
     this.addEventListener("deck-draw", (event) => {
-      console.log("deck-draw received");
       const mat = document.getElementById("mat");
       addCard(mat);
     });

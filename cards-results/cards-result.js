@@ -1,7 +1,11 @@
-function createCard() {
-  const card = document.createElement("img");
-  card.setAttribute("src", "cardBack.png");
-  return card;
+function createCard(cardSrc) {
+  if (cardSrc != null) {
+    const card = document.createElement("img");
+    const style = "width:18%";
+    card.setAttribute("src", cardSrc ? cardSrc : "cardBack.png");
+    card.style = style;
+    return card;
+  } else {
+    return null;
+  }
 }
-
-function GetRandomCard(cardsAlreadyPicked) {}
