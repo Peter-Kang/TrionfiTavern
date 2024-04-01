@@ -16,18 +16,29 @@
     section[share] {
       visibility: hidden;
       padding: 5px;
+      text-align: center;
+      padding:1em;
+    }
+    button
+    {
+      display: block;
+      margin:auto;
+      background: goldenrod;
     }
   </style>
   <div id="mat" class="card-mat"></div>
   <section share id="shareSection">
     <p>Link to Share Reading</p>
     <input type="text" value="" id="urlBox"></input>
+    <button onclick="reset(document.getElementsByTagName('cards-results')[0])"> Reset Cards</button>
   </section>
   <script tl-effect tl-dependencies="current-cards deck">
     /* 
 Update Mat from current-card list 
 */
     const mat = this.shadowRoot.getElementById("mat");
+    //Url parameters
+    const outParameters = [];
     //    clear
     mat.innerHTML = "";
     //    fill
@@ -39,8 +50,6 @@ Update Mat from current-card list
       const deckIndexToUse =
         inputIndex >= 0 && inputIndex < DeckList.length ? inputIndex : 0; //use default if not a valid deck
       const deckToUse = DeckList[deckIndexToUse];
-      //Url parameters
-      const outParameters = [];
       outParameters.push("deck=" + inputIndex.toString());
       //display each of the cards
       cardsPicked.forEach((card) => {
@@ -48,20 +57,24 @@ Update Mat from current-card list
         addCard(mat, deckToUse, card);
       });
       //Create Link and make visible
-
-      const current_url =
+    const current_url =
         location.protocol +
         "//" +
         location.host +
         location.pathname +
         "?"+
         outParameters.join("&");
-      console.log(current_url);
       this.shadowRoot.getElementById("urlBox").value = current_url;
+      history.pushState(null, null, current_url);
       this.shadowRoot.getElementById("shareSection").style.visibility =
         "visible";
-      history.pushState(null, null, current_url);
     }
+    else
+    {
+      this.shadowRoot.getElementById("shareSection").style.visibility =
+        "hidden";
+    }
+    
   </script>
 
   <script tl-effect>
@@ -70,11 +83,6 @@ Update Mat from current-card list
     Page Loads read in parameters
     */
     const urlParams = new URLSearchParams(window.location.search);
-    console.log(
-      "Has Cards: " + urlParams.has("cards"),
-      "Cards: " + urlParams.getAll("cards")
-    );
-    console.log("Hash Deck: " + urlParams.has("deck"), urlParams.get("deck"));
     //Example http://localhost:3000/?deck=0&cards=46&cards=-0
 
     const urlDeck = urlParams.get("deck");
@@ -93,6 +101,7 @@ Update Mat from current-card list
       return !isNaN(urlDeck) && getDeckToUse.length > Math.abs(card);
     });
     this.setAttribute("current-cards", urlCards.join(" "));
+
     /*
     Button Pressed Event - Picking a Random Card to add
     */

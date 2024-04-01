@@ -19,7 +19,6 @@ function addCard(mat, deckToUse, card) {
   mat.appendChild(cardElement);
 }
 
-function CreateLink(urlParameters,cards, deck)
-{
-
+function reset(cardResult) {
+  cardResult.setAttribute("current-cards", "");
 }
