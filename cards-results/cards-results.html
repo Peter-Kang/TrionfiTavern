@@ -60,6 +60,7 @@ Update Mat from current-card list
       this.shadowRoot.getElementById("urlBox").value = current_url;
       this.shadowRoot.getElementById("shareSection").style.visibility =
         "visible";
+      history.pushState(null, null, current_url);
     }
   </script>
 
