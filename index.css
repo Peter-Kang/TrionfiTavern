@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Misteri Caps";
+  src: url("MisteriCaps-8Mxyz.ttf") format("truetype");
+}
+
 /*header*/
 /* Sections centering */
 header {
@@ -9,10 +14,9 @@ header {
 }
 /* header font*/
 header {
-  font-family: "BrownStone";
+  font-family: "Misteri Caps";
   color: white;
-  text-shadow: black 2px 2px;
-  font-size: 32px;
+  font-size: 48px;
   line-height: 1.5;
 }
 
