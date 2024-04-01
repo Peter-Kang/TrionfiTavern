@@ -16,7 +16,7 @@ function GetRandomCardNotOnList(cardResult, deckToUse) {
       });
     const random_index = Math.floor(Math.random() * unpickedCards.length);
     //check if it is a flipped card
-    const isFlipped = Math.floor(Math.random() * 100) < 25;
+    const isFlipped = Math.floor(Math.random() * 100) < 35;
     const current = cardResult.getAttribute("current-cards");
     const just_picked_value = isFlipped
       ? "-" + unpickedCards[random_index].toString()
