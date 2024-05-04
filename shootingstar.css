@@ -197,7 +197,7 @@ body {
   animation-delay: 2677ms;
 }
 .shooting_star:nth-child(16) {
-  top: calc(50% - 97%);
+  top: calc(97% - 50% );
   left: calc(50% - 2px);
   animation-delay: 2409ms;
 }
@@ -234,12 +234,25 @@ body {
 }
 .shooting_star:nth-child(20) {
   top: calc(50% - 178px);
-  left: calc(50% - 95%);
-  animation-delay: 6992ms;
+  left: calc(95% - 50%);
+  animation-delay: 11110ms;
+  filter: drop-shadow(0 0 6px rgba(255, 155, 255, 1));
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 0, 255, 0),
+    rgb(157, 15, 157),
+    rgba(255, 0, 255, 0)
+  );
 }
 .shooting_star:nth-child(20)::before,
 .shooting_star:nth-child(20)::after {
-  animation-delay: 6992ms;
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 0, 255, 0),
+    rgb(157, 15, 157),
+    rgba(255, 0, 255, 0)
+  );
+  animation-delay: 11110ms;
 }
 @keyframes tail {
   0% {
